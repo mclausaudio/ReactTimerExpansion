@@ -23,15 +23,23 @@ var Clock = React.createClass({
         return minutes + ":" + seconds;
     },
     render: function(){
-        var {totalSeconds} = this.props;
+        var {totalSeconds, workingStatus} = this.props;
+        var bgColor;
+        if (workingStatus === "working") {
+            bgColor = '#3adb76';
+        }
+        
+        
         return (
-            <div className="clock">
-                <span className="clock-text">
+            <div className="clock" style={{background: bgColor}}>
+
+                <p className="clock-text">{workingStatus.charAt(0).toUpperCase() + workingStatus.slice(1)}</p>
+                <p className="clock-text">
                     {this.formatSeconds(totalSeconds)}
-                </span>
+                </p>
             </div>
         );
     }
 });
-
+// style='background-color:#3adb76'>
 module.exports = Clock;

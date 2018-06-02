@@ -19,7 +19,7 @@ describe("Timer", () => {
             setTimeout(() => {
                 expect(timer.state.count).toBe(2);
                 done();
-            }, 2001)
+            }, 2010)
         });
          it('should pause countdown on paused status', (done) => {
              var timer = TestUtils.renderIntoDocument(<Timer/>);

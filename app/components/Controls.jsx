@@ -5,26 +5,40 @@ var Controls = React.createClass({
         countdownStatus: React.PropTypes.string.isRequired,
         onStatusChange: React.PropTypes.func.isRequired
     },
-    onStatusChange: function (newStatus) {
+    onStatusChange: function (newTimerStatus, newWorkingStatus) {
         return () => {
-            this.props.onStatusChange(newStatus);   
+            this.props.onStatusChange(newTimerStatus, newWorkingStatus);   
         }
     },
     render: function () {
-        var {countdownStatus} = this.props;
+        var {countdownStatus, workingStatus, lastState} = this.props;
         var renderStartStopButton = () => {
-            if (countdownStatus === 'started') {
-                return <button className = "button secondary" onClick={this.onStatusChange('paused')}>Pause</button>
-                
-            } else {
-                return <button className = "button primary blue" onClick={this.onStatusChange('started')}>Start</button>
+            if (workingStatus === 'working') {
+                return <button className = "button success" onClick={this.onStatusChange('paused', 'relaxing')}>Relax</button>
+            } else if (workingStatus === 'relaxing') {
+                return <button className = "button primary" onClick={this.onStatusChange('started', 'working')}>Start work</button>
+            } else if ('paused') {
+                if (lastState === 'working') {
+                    return <button className = "button success" onClick={this.onStatusChange('paused', 'relaxing')}>Relax</button>
+                } else {
+                    return <button className = "button primary" onClick={this.onStatusChange('started', 'working')}>Start work</button>
+                }
             }
         }
         
+        // var renderWorkRelaxButton = () => {
+        //     if (workingStatus === 'working') {
+        //         return <button className="button alert hollow" onClick={this.onStatusChange('stopped', 'relaxing')}>Take a break</button>
+        //     } else {
+        //         return <button className="button alert hollow" onClick={this.onStatusChange('started', 'working')}>Back to work</button>
+        //     }
+        // }
+        
         return (
-            <div className = "controls">
+            <div className = "controls button-group">
                 {renderStartStopButton()}
-                <button className="button alert hollow" onClick={this.onStatusChange('stopped')}>Clear</button>
+                <button className = "button secondary" onClick={this.onStatusChange('paused', 'paused')}>Pause</button>
+                <button className="button alert hollow" onClick={this.onStatusChange('stopped', 'stopped')}>Clear Session</button>
             </div>
         )
     }

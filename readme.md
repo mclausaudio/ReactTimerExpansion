@@ -1,1 +1,1 @@
-Boilerplate React App
+React Timer Part 2 - Expanded featues
