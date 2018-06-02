@@ -70,9 +70,10 @@ var Timer = React.createClass({
     return (
       <div>
         <h1 className="page-title">Timer App</h1>
-        <Clock totalSeconds={count} workingStatus={workingStatus} />
+        <Clock totalSeconds={count} workingStatus={workingStatus} timeSpentRelaxing={timeSpentRelaxing} timeSpentWorking={timeSpentWorking} />
+        <TimeKeeper timeSpentWorking={timeSpentWorking} timeSpentRelaxing={timeSpentRelaxing} workingStatus={workingStatus} timerStatus={timerStatus} totalSeconds={count}/>
         <Controls countdownStatus={timerStatus} workingStatus={workingStatus} onStatusChange={this.handleStatusChange}  />
-        <TimeKeeper timeSpentWorking={timeSpentWorking} timeSpentRelaxing={timeSpentRelaxing} workingStatus={workingStatus} timerStatus={timerStatus}/>
+        
       </div>
     );
   }

@@ -15,13 +15,14 @@ var TimeKeeper = React.createClass({
         return minutes + ":" + seconds;
     },
    render: function () {
-       var {timeSpentWorking, timeSpentRelaxing, workingStatus, timerStatus} = this.props;
+       var {totalSeconds, timeSpentWorking, timeSpentRelaxing, workingStatus, timerStatus} = this.props;
        
         return (
-            <div>
+            <div className="time-keeper">
                <p>You are currently {workingStatus}</p>
                <p>Time spent working: <span className="total-working-time-text">{this.formatSeconds(timeSpentWorking)}</span></p>
                <p>Time spent relaxing: <span className="total-relaxing-time-text">{this.formatSeconds(timeSpentRelaxing)}</span></p>
+               <p>Total time: {this.formatSeconds(totalSeconds)}</p>
             </div>
         )
    } 

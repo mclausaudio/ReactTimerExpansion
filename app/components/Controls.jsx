@@ -18,11 +18,12 @@ var Controls = React.createClass({
             } else if (workingStatus === 'relaxing') {
                 return <button className = "button primary" onClick={this.onStatusChange('started', 'working')}>Start work</button>
             } else if ('paused') {
-                if (lastState === 'working') {
-                    return <button className = "button success" onClick={this.onStatusChange('paused', 'relaxing')}>Relax</button>
-                } else {
                     return <button className = "button primary" onClick={this.onStatusChange('started', 'working')}>Start work</button>
-                }
+            }
+        }
+        var renderPauseButton = () => {
+            if (workingStatus !== 'paused') {
+                return <button className = "button secondary" onClick={this.onStatusChange('paused', 'paused')}>Pause</button>
             }
         }
         
@@ -37,7 +38,7 @@ var Controls = React.createClass({
         return (
             <div className = "controls button-group">
                 {renderStartStopButton()}
-                <button className = "button secondary" onClick={this.onStatusChange('paused', 'paused')}>Pause</button>
+                {renderPauseButton()}
                 <button className="button alert hollow" onClick={this.onStatusChange('stopped', 'stopped')}>Clear Session</button>
             </div>
         )
